@@ -7,4 +7,5 @@ Una lumínica y la idea es , que a una cierta distancia como precaución se ilum
 La otra de tipo sonido, como anunciando a inminente colisión. Esta tiene dos opciones a su vez, que serán:
 Una para la distancia a la que se desea que suene.
 Otra para cambiar la frecuencia del aviso. 
+Una más para que cuando esté sonando la alarma y continue acercando el led comience a parpadear.
 Para saber como se ha construido el programa paso a paso www.elbrujitocanario.es
