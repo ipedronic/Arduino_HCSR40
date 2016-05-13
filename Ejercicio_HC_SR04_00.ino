@@ -5,6 +5,7 @@
 #define PinLed 3               //Define el pin del Led
 #define PinSonoro 5            //Define el altavoz
 #define AlarmaLed 20           //Define la alarma de luz a 20 centimetros
+#define AlarmaParpadeo 7       //Led parpade cuando es muy proximo
 #define AlarmaSonora 10        //Define sonido a 10 centimetros
 #define TonoSonoro 68           //Valores de 31Hz a 65535 Hz 
 #define Medida 58              //58 nos da la distancia en centimetro y 148 en pulgadas
@@ -36,7 +37,7 @@ int Calculo_Sensor_Sonido (int trig,int echo){
 /////////////////////////////////////////////////
 //////////////////////////Funcion alarma luminosa
 /////////////////////////////////////////////////
-void alarma_Luminosa (int alarmaLed,int distanciaLed){
+void alarma_Luminosa (int alarmaLed,int distanciaLed,int alarmaParpadeo){
  
   if (distanciaLed <= alarmaLed){
     delayMicroseconds(50);
@@ -44,7 +45,14 @@ void alarma_Luminosa (int alarmaLed,int distanciaLed){
   }else{
     digitalWrite(PinLed,LOW);
     }
-  }
+  
+  if (distanciaLed <= alarmaParpadeo){
+    delayMicroseconds(50);
+  digitalWrite(PinLed,HIGH);
+  delay (100);
+  digitalWrite(PinLed,LOW);
+    }
+    }
  /////////////////////////////////////////////////
 //////////////////////////Funcion alarma sonora
 /////////////////////////////////////////////////
@@ -74,7 +82,7 @@ void pantalla (int dist){
 void loop() {
  int distancia =Calculo_Sensor_Sonido (Trig,Echo);
  //////////////////////////////////////////Alarmas
-  alarma_Luminosa (AlarmaLed,distancia); //Llamada de funcion alarma luminosa
+  alarma_Luminosa (AlarmaLed,distancia,AlarmaParpadeo); //Llamada de funcion alarma luminosa
   alarma_Sonora (AlarmaSonora,distancia);//Llamada de funcion alarma sonora
  //////////////////////////////////////////Pantalla 
   pantalla (distancia);                  //Lamada de funcion Imprimo por serial
