@@ -34,13 +34,11 @@ int Calculo_Sensor_Sonido (int trig,int echo){
  int duracion = pulseIn(echo,HIGH);//Guarda la senal
  int Retorna_distancia = (duracion/Medida);//Convertimos en centimetros
  if (Retorna_distancia >= 400 || Retorna_distancia <= 0) {
-  er =1;
-  digitalWrite(Pinerror,HIGH); ////Enciende Led de error
-Serial.println("**ERROR***");
-}else{
-  er=0;
-  digitalWrite(Pinerror,LOW);  ////Apaga led de error
- return Retorna_distancia;
+       er =1; 
+       Serial.println("**ERROR***");
+   }else{
+       er=0;
+       return Retorna_distancia;
   }
 }
 /////////////////////////////////////////////////
@@ -70,8 +68,7 @@ void alarma_Sonora (int alarmaSonora,int dist_sonora ){
   if (dist_sonora <= alarmaSonora){
     delayMicroseconds(50);
     tone(PinSonoro,TonoSonoro);         //TonoSonoro Valores de 31Hz a 65535 Hz
-    Serial.println("**COLICION***");    // Salida por monitor
-    
+    Serial.println("**COLICION***");    // Salida por monitor    
     }else{
       noTone(PinSonoro);
       }
@@ -98,14 +95,14 @@ void pantalla (int dist){
 void loop() {
  int distancia =Calculo_Sensor_Sonido (Trig,Echo);
  //////////////////////////////////////////Alarmas
- if (er == 0){////////////////////////////////////Condicion de error
+ if (er == 0){                                              ////////////////////////////////////Condicion de error
+  digitalWrite(Pinerror,LOW);  ////Apaga led de error
   alarma_Luminosa (AlarmaLed,distancia,AlarmaParpadeo); //Llamada de funcion alarma luminosa
   alarma_Sonora (AlarmaSonora,distancia);//Llamada de funcion alarma sonora
  //////////////////////////////////////////Pantalla 
   pantalla (distancia);                  //Lamada de funcion Imprimo por serial
- }
- 
-
+ }else{ digitalWrite(Pinerror,HIGH); ////Enciende Led de error
+ } 
 }
 
 
