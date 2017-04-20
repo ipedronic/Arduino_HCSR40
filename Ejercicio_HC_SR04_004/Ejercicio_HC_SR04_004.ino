@@ -1,7 +1,7 @@
 //www.elbrujitocanaio.es 
 //Todo el código esta bajo licencia de la Creative Commons.
-#define Trig  2                //Definimos como constante
-#define Echo 4                 //Definimos como constante
+#define Trig  4                //Definimos como constante
+#define Echo 2                 //Definimos como constante
 #define PinLed 3               //Define el pin del Led
 #define PinSonoro 5            //Define el altavoz
 #define AlarmaLed 20           //Define la alarma de luz a 20 centimetros
